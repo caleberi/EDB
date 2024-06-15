@@ -57,4 +57,4 @@ This was due to me having no initially knowledge of ramp payment.
 ![db-diagram](./assets/db.png)
 
 ## Video Link
-![Video](https://drive.google.com/file/d/10XYCOlc-lTCxZ3fh89P5o6WE71JTiFc1/view?usp=sharing)
+- https://drive.google.com/file/d/10XYCOlc-lTCxZ3fh89P5o6WE71JTiFc1/view?usp=sharing
