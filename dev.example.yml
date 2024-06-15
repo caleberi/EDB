@@ -1,0 +1,23 @@
+redisAddr: 
+logLevel: debug
+MongoDB:
+  dbUri: mongodb://localhost:27017/
+  databaseName: yc-backend
+allowedCorsOrigin: 
+  - https://*
+  - http://localhost:3000
+serverInUse: 
+serverPort: :8080
+YellowCardCredentials:
+  apiKey: 
+  secretKey: 
+  baseUrl: https://sandbox.api.yellowcard.io
+smtpCredentials:
+  projectSecret: 
+  baseUrl: https://api.smtpexpress.com/send
+JWTCredentials:
+  accessTokenSecret: 
+  accessTokenTTL: 36000
+  AccessTokenClaim:
+    issuer: yc-backer
+    subject: yc-backer-app
