@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "f8f896b5-d820-47bb-a635-be2219df407c",
+		"name": "YC-Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32611342",
+		"_collection_link": "https://winter-shuttle-848364.postman.co/workspace/Play-plug~01af7a64-5965-49d7-b5cb-af5c8c53a5ea/collection/32611342-f8f896b5-d820-47bb-a635-be2219df407c?action=share&source=collection_link&creator=32611342"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Caleb Erioluwa\",\n    \"lastName\": \"Adewole\",\n    \"email\": \"caleberioluwa@gmail.com\",\n    \"password\":\"test1234\",\n    \"bvn\": \"23451678123\",\n    \"dob\": \"02/01/1997\",\n    \"idType\": \"passport\",\n    \"idNumber\": \"N5427812\",\n    \"additionalIDType\": \"license\",\n    \"address\": \"1234,abc str bronx\",\n    \"country\": \"Nigeria\",\n    \"phone\": \"+2348133345430\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"caleberioluwa@gmail.com\",\n    \"password\":\"test1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Management",
+			"item": [
+				{
+					"name": "Add Employee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIiLCJleHAiOjE3MTg0MDM4MTgsImlhdCI6MTcxODQwMzgxOCwiaXNzIjoieWMtYmFja2VyIiwicGF5bG9hZCI6IjY2Njk4ODg5Mzc2MjFiMjczMjQ2Y2M5YyIsInN1YiI6IkNhbGViIEVyaW9sdXdhOkFkZXdvbGUifQ.XLInAevNcCNKlcYdoJUxta2FRUhMTP-GhP9XnE61wDU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test121@gmail.com\",\n    \"firstName\": \"Taiwo\",\n    \"lastName\": \"Love\",\n    \"bvn\": \"23451678123\",\n    \"dob\": \"07-6-1988\",\n    \"idType\": \"passport\",\n    \"idNumber\": \"N5427812\",\n    \"salary\": 5400.2,\n    \"phone\": \"+23481457820\",\n    \"additionalIDType\": \"NIN\",\n    \"address\": \"1234,abc str londonx\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/employee/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Employee Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIiLCJleHAiOjE3MTg0MDQwMDYsImlhdCI6MTcxODQwNDAwNiwiaXNzIjoieWMtYmFja2VyIiwicGF5bG9hZCI6IjY2Njk4ODg5Mzc2MjFiMjczMjQ2Y2M5YyIsInN1YiI6IkNhbGViIEVyaW9sdXdhOkFkZXdvbGUifQ.dWsm5xymSBjsm_8CRcEQz1phQ5oqS6JvbCOeQr_iyho",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Femi\",\n    \"lastName\": \"Love\",\n    \"idType\": \"driver_license\",\n    \"address\": \"1234,abc str lond\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/employee/666cb76e47685acadd908349",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee",
+								"666cb76e47685acadd908349"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Employee",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Make Disbursements",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/disbursements/666cb76e47685acadd908349",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disbursements",
+								"666cb76e47685acadd908349"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ping Server",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Webhook",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-YC-Signature",
+						"value": "BVM9nT+6U6WJeDCbo+5fiqzp0HhOrkDpAyhJEyEVEoE="
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": \"b72dbfe5-0ac7-5e68-9930-a693918b9f4f\",\n  \"sequenceId\": \"e54c1e2b-8a7a-45b5-a979-d33456480892\",\n  \"status\": \"failed\",\n  \"apiKey\": \"c5315180696a51ab885023bdc1ae3c0e\",\n  \"event\": \"PAYMENT.FAILED\",\n  \"executedAt\": 1718451615948\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/webhook/yellow-card",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"webhook",
+						"yellow-card"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
