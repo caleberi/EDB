@@ -13,7 +13,7 @@ Business can
 
 ## Assumptions
 -  All  payment  are assumed to be in Naira alone.
--  Refunds and cancellations are not support.
+-  Refunds and cancellations are not supported.
 -  Account has been funded already via the YellowCard dashboard 
 -  The user is the business owner
 -  Provided information have been validated.
