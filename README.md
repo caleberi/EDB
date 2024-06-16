@@ -16,6 +16,7 @@ Business can
 -  Refunds and cancellations are not support.
 -  Account has been funded already via the YellowCard dashboard 
 -  The user is the business owner
+-  Provided information have been validated.
 -  KYC meta information for employees and employers have been collected and verified.
 
 ## Question & Concerns
