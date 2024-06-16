@@ -44,7 +44,7 @@ func (srv *Application) Setup() *Application {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	r.Use(func(ctx *gin.Context) {
-		cfg := common.GetConfigFromCtx(ctx)
+		cfg := common.ConfigFromCtx(ctx)
 		if cfg == nil {
 			panic(errors.New("allowed cross-origin not set"))
 		}

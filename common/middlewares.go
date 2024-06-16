@@ -24,23 +24,23 @@ const (
 	UserKey              = "__user"
 )
 
-func GetRequestIdFromCtx(ctx *gin.Context) string {
+func RequestIdFromCtx(ctx *gin.Context) string {
 	return ctx.MustGet(requestIdContextKey).(string)
 }
 
-func GetConfigFromCtx(ctx *gin.Context) *Config {
+func ConfigFromCtx(ctx *gin.Context) *Config {
 	return ctx.MustGet(configContextKey).(*Config)
 }
 
-func GetDbFromCtx(ctx *gin.Context) *mongo.Client {
+func DbFromCtx(ctx *gin.Context) *mongo.Client {
 	return ctx.MustGet(dbContextKey).(*mongo.Client)
 }
 
-func GetReposFromCtx(ctx *gin.Context) *repository.Repositories {
+func ReposFromCtx(ctx *gin.Context) *repository.Repositories {
 	return ctx.MustGet(repositoryContextKey).(*repository.Repositories)
 }
 
-func GetLoggerFromCtx(ctx *gin.Context) internals.Logger {
+func LoggerFromCtx(ctx *gin.Context) internals.Logger {
 	return ctx.MustGet(loggerContextKey).(internals.Logger)
 }
 
@@ -79,8 +79,8 @@ func AddRequestIDMiddleware() gin.HandlerFunc {
 
 func AuthorizeUser() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		cfg := GetConfigFromCtx(ctx)
-		repo := GetReposFromCtx(ctx)
+		cfg := ConfigFromCtx(ctx)
+		repo := ReposFromCtx(ctx)
 
 		value := ctx.GetHeader("Authorization")
 

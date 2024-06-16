@@ -33,8 +33,8 @@ type Webhook struct {
 }
 
 func YellowCardWebHook(ctx *gin.Context) {
-	repo := common.GetReposFromCtx(ctx)
-	logger := common.GetLoggerFromCtx(ctx)
+	repo := common.ReposFromCtx(ctx)
+	logger := common.LoggerFromCtx(ctx)
 
 	if validateSignature(ctx) {
 		ctx.JSON(http.StatusBadRequest, utils.ErrorResponse(errors.New("validating request to webhook payload failed")))
@@ -67,7 +67,7 @@ func YellowCardWebHook(ctx *gin.Context) {
 }
 
 func validateSignature(ctx *gin.Context) bool {
-	cfg := common.GetConfigFromCtx(ctx)
+	cfg := common.ConfigFromCtx(ctx)
 	receivedSignature := ctx.GetHeader("X-YC-Signature")
 	if receivedSignature == "" {
 		return false

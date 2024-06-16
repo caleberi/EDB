@@ -17,9 +17,9 @@ import (
 )
 
 func MakeDisbursmentToEmployee(ctx *gin.Context) {
-	repo := common.GetReposFromCtx(ctx)
-	logger := common.GetLoggerFromCtx(ctx)
-	cfg := common.GetConfigFromCtx(ctx)
+	repo := common.ReposFromCtx(ctx)
+	logger := common.LoggerFromCtx(ctx)
+	cfg := common.ConfigFromCtx(ctx)
 
 	user := ctx.MustGet(common.UserKey).(*models.User)
 

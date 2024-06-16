@@ -10,8 +10,8 @@ import (
 )
 
 func PingDb(ctx *gin.Context) {
-	db := common.GetDbFromCtx(ctx)
-	logger := common.GetLoggerFromCtx(ctx)
+	db := common.DbFromCtx(ctx)
+	logger := common.LoggerFromCtx(ctx)
 
 	err := db.Ping(ctx, &readpref.ReadPref{})
 	if err != nil {

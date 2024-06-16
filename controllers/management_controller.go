@@ -53,8 +53,8 @@ type UpdateEmployeeRequest struct {
 }
 
 func AddEmployee(ctx *gin.Context) {
-	logger := common.GetLoggerFromCtx(ctx)
-	repo := common.GetReposFromCtx(ctx)
+	logger := common.LoggerFromCtx(ctx)
+	repo := common.ReposFromCtx(ctx)
 
 	user, ok := ctx.MustGet(common.UserKey).(*models.User)
 	if !ok {
@@ -122,7 +122,7 @@ func AddEmployee(ctx *gin.Context) {
 }
 
 func DeleteEmployee(ctx *gin.Context) {
-	repo := common.GetReposFromCtx(ctx)
+	repo := common.ReposFromCtx(ctx)
 
 	user := ctx.MustGet(common.UserKey).(*models.User)
 
@@ -148,8 +148,8 @@ func DeleteEmployee(ctx *gin.Context) {
 }
 
 func UpdateEmployee(ctx *gin.Context) {
-	repo := common.GetReposFromCtx(ctx)
-	logger := common.GetLoggerFromCtx(ctx)
+	repo := common.ReposFromCtx(ctx)
+	logger := common.LoggerFromCtx(ctx)
 
 	employeeId, err := primitive.ObjectIDFromHex(ctx.Param("employeeId"))
 

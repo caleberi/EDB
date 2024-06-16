@@ -49,8 +49,8 @@ type LoginResponse struct {
 }
 
 func RegisterUser(c *gin.Context) {
-	repo := common.GetReposFromCtx(c)
-	logger := common.GetLoggerFromCtx(c)
+	repo := common.ReposFromCtx(c)
+	logger := common.LoggerFromCtx(c)
 
 	var createUserRequest CreateUserRequest
 
@@ -114,9 +114,9 @@ func RegisterUser(c *gin.Context) {
 }
 
 func LoginUser(c *gin.Context) {
-	cfg := common.GetConfigFromCtx(c)
-	repo := common.GetReposFromCtx(c)
-	logger := common.GetLoggerFromCtx(c)
+	cfg := common.ConfigFromCtx(c)
+	repo := common.ReposFromCtx(c)
+	logger := common.LoggerFromCtx(c)
 
 	var loginRequest LoginRequest
 	if err := c.ShouldBindJSON(&loginRequest); err != nil {
