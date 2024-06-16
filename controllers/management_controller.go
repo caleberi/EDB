@@ -99,7 +99,7 @@ func AddEmployee(ctx *gin.Context) {
 	_, err := repo.EmployeeRepository.FindOne(ctxWithTimeout, bson.D{{Key: "email", Value: employeeRequest.Email}})
 	if !errors.Is(err, mongo.ErrNoDocuments) {
 		logger.Errorf("Employee with the provided email exists already: %v", err)
-		ctx.JSON(http.StatusConflict, utils.ErrorResponse(errors.New("employee with the provided email exists already")))
+		ctx.JSON(http.StatusNotFound, utils.ErrorResponse(errors.New("employee with the provided email exists already")))
 		return
 	}
 
@@ -124,10 +124,13 @@ func AddEmployee(ctx *gin.Context) {
 func DeleteEmployee(ctx *gin.Context) {
 	repo := common.ReposFromCtx(ctx)
 
-	user := ctx.MustGet(common.UserKey).(*models.User)
+	user, ok := ctx.MustGet(common.UserKey).(*models.User)
+	if !ok {
+		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(errors.New("internal server error")))
+		return
+	}
 
 	employeeId, err := primitive.ObjectIDFromHex(ctx.Param("employeeId"))
-
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
 		return
@@ -140,7 +143,8 @@ func DeleteEmployee(ctx *gin.Context) {
 
 	// Delete many is not proper here:, but it make ease witht the model definition
 	if err := repo.EmployeeRepository.DeleteMany(ctx, query); err != nil {
-		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(fmt.Errorf("could not delete employee with id [%v]", employeeId.String())))
+		ctx.JSON(http.StatusInternalServerError,
+			utils.ErrorResponse(fmt.Errorf("could not delete employee with id [%v]", employeeId.String())))
 		return
 	}
 
@@ -152,16 +156,15 @@ func UpdateEmployee(ctx *gin.Context) {
 	logger := common.LoggerFromCtx(ctx)
 
 	employeeId, err := primitive.ObjectIDFromHex(ctx.Param("employeeId"))
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
+		return
+	}
 
 	var employeeeRequest UpdateEmployeeRequest
 
 	if err := ctx.ShouldBindJSON(&employeeeRequest); err != nil {
 		logger.Infof("bind request to createUserRequest failed : %v", err)
-		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
-		return
-	}
-
-	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
 		return
 	}
@@ -183,7 +186,8 @@ func UpdateEmployee(ctx *gin.Context) {
 	}
 
 	if err := repo.EmployeeRepository.UpdateOneById(ctx, employeeId, employee); err != nil {
-		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(fmt.Errorf("could not update employee with id [%v]", employeeId.String())))
+		ctx.JSON(http.StatusInternalServerError,
+			utils.ErrorResponse(fmt.Errorf("could not update employee with id [%v]", employeeId.String())))
 		return
 	}
 

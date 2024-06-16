@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -21,10 +22,14 @@ func MakeDisbursmentToEmployee(ctx *gin.Context) {
 	logger := common.LoggerFromCtx(ctx)
 	cfg := common.ConfigFromCtx(ctx)
 
-	user := ctx.MustGet(common.UserKey).(*models.User)
+	user, ok := ctx.MustGet(common.UserKey).(*models.User)
+	if !ok {
+		err := fmt.Errorf("error occurred while creating user")
+		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
+		return
+	}
 
 	employeeId, err := primitive.ObjectIDFromHex(ctx.Param("employeeId"))
-
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
 		return
@@ -33,7 +38,6 @@ func MakeDisbursmentToEmployee(ctx *gin.Context) {
 	query := primitive.D{{Key: "_id", Value: employeeId}}
 
 	employee, err := repo.EmployeeRepository.FindOne(ctx, query)
-
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
 		return

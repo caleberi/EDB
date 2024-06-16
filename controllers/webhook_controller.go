@@ -37,7 +37,8 @@ func YellowCardWebHook(ctx *gin.Context) {
 	logger := common.LoggerFromCtx(ctx)
 
 	if validateSignature(ctx) {
-		ctx.JSON(http.StatusBadRequest, utils.ErrorResponse(errors.New("validating request to webhook payload failed")))
+		ctx.JSON(http.StatusBadRequest,
+			utils.ErrorResponse(errors.New("validating request to webhook payload failed")))
 		return
 	}
 
@@ -55,7 +56,10 @@ func YellowCardWebHook(ctx *gin.Context) {
 	}
 
 	switch hook.Event {
-	case PendingEvent, PendingEvent, CompletedEvent, FailedEvent:
+	case PendingEvent,
+		ProcessingEvent,
+		CompletedEvent,
+		FailedEvent:
 		err = repo.DisbursementRepository.UpdateOneById(ctx, disbursement.ID, models.Disbursement{Status: hook.Status})
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))

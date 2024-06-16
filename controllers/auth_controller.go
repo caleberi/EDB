@@ -154,7 +154,7 @@ func LoginUser(c *gin.Context) {
 
 	if err != nil {
 		logger.Infof("error during login : %v", err)
-		c.JSON(http.StatusInternalServerError, utils.ErrorResponse(errors.New("error occurred when signing")))
+		c.JSON(http.StatusInternalServerError, utils.ErrorResponse(errors.New("error occurred")))
 		return
 	}
 
