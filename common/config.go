@@ -79,7 +79,7 @@ func LoadConfiguration(cfgEnvSetting ConfEnvSetting) (*Config, error) {
 		config.AddDriver(yaml.Driver)
 	}
 	files := []string{}
-	if !lo.IsEmpty[string](cfgEnvSetting.EnvFilePath) {
+	if !lo.IsEmpty(cfgEnvSetting.EnvFilePath) {
 		files = append(files, cfgEnvSetting.EnvFilePath)
 	}
 	files = append(files, cfgEnvSetting.YamlFilePath...)
