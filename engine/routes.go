@@ -11,7 +11,6 @@ func (srv *Application) RegisterRoute() *Application {
 	r.RedirectFixedPath = false
 	r.RedirectTrailingSlash = false
 
-	r.GET("/ping", controllers.PingDb)
 	r.POST("/webhook/yellow-card", controllers.YellowCardWebHook)
 
 	authorizedRouter := r.Group("/auth")
