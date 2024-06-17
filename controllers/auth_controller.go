@@ -75,12 +75,19 @@ func RegisterUser(c *gin.Context) {
 		return
 	}
 
+	dobTIme, err := time.Parse("2006-01-02", createUserRequest.DOB)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, utils.ErrorResponse(errors.New("invalid date of birth")))
+		return
+	}
+	dobTimeStr := dobTIme.Format("04/03/2016")
+
 	user := models.User{
 		FirstName:          strings.TrimSpace(createUserRequest.FirstName),
 		LastName:           strings.TrimSpace(createUserRequest.LastName),
 		Email:              strings.ToLower(createUserRequest.Email),
 		Password:           hashedPassword,
-		DOB:                createUserRequest.DOB,
+		DOB:                dobTimeStr,
 		IdType:             createUserRequest.IDType,
 		IdNumber:           createUserRequest.IDNumber,
 		Phone:              createUserRequest.Phone,

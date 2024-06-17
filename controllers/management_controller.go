@@ -71,14 +71,22 @@ func AddEmployee(ctx *gin.Context) {
 
 	logger.Infof("Received employee request: %+v", employeeRequest)
 
+	timeNow := time.Now()
+	dobTIme, err := time.Parse("2006-01-02", employeeRequest.DOB)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, utils.ErrorResponse(errors.New("invalid date of birth")))
+		return
+	}
+	dobTimeStr := dobTIme.Format("04/03/2016")
+
 	employee := models.Employee{
 		Email:            employeeRequest.Email,
 		FirstName:        employeeRequest.FirstName,
 		LastName:         employeeRequest.LastName,
 		BVN:              employeeRequest.BVN,
-		UpdatedAt:        time.Now(),
-		CreatedAt:        time.Now(),
-		DOB:              employeeRequest.DOB,
+		UpdatedAt:        &timeNow,
+		CreatedAt:        &timeNow,
+		DOB:              dobTimeStr,
 		IDType:           employeeRequest.IDType,
 		IDNumber:         employeeRequest.IDNumber,
 		Salary:           employeeRequest.Salary,
@@ -96,7 +104,7 @@ func AddEmployee(ctx *gin.Context) {
 	defer cancel()
 
 	logger.Infof("Checking if employee with email %s already exists", employeeRequest.Email)
-	_, err := repo.EmployeeRepository.FindOne(ctxWithTimeout, bson.D{{Key: "email", Value: employeeRequest.Email}})
+	_, err = repo.EmployeeRepository.FindOne(ctxWithTimeout, bson.D{{Key: "email", Value: employeeRequest.Email}})
 	if !errors.Is(err, mongo.ErrNoDocuments) {
 		logger.Errorf("Employee with the provided email exists already: %v", err)
 		ctx.JSON(http.StatusNotFound, utils.ErrorResponse(errors.New("employee with the provided email exists already")))
@@ -169,10 +177,11 @@ func UpdateEmployee(ctx *gin.Context) {
 		return
 	}
 
+	updatedAt := time.Now()
 	employee := models.Employee{
 		FirstName:        employeeeRequest.FirstName,
 		LastName:         employeeeRequest.LastName,
-		UpdatedAt:        time.Now(),
+		UpdatedAt:        &updatedAt,
 		IDType:           employeeeRequest.IDType,
 		IDNumber:         employeeeRequest.IDNumber,
 		Salary:           employeeeRequest.Salary,

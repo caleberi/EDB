@@ -101,10 +101,11 @@ func MakeDisbursmentToEmployee(ctx *gin.Context) {
 	}
 
 	logger.Infof("Payment = %+v", payment)
+	timeNow := time.Now()
 	disbursment := models.Disbursement{
 		ReceiverID:   employee.ID,
 		SenderID:     user.ID,
-		CreatedAt:    time.Now(),
+		CreatedAt:    &timeNow,
 		SalaryAmount: employee.Salary,
 		Status:       "processing",
 		Payment:      payment,
