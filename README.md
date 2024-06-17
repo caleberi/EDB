@@ -31,12 +31,11 @@ Business can
 -  Environments  -  https://docs.yellowcard.engineering/docs/environments-api
 
 ## Challenges
-- Understanding the authentication section proof a bit uneasy as I was getting  `invalid apiKey signature combination` even with the provide recipe in https://docs.yellowcard.engineering/recipes/authentication-javascript-python.
+- Understanding the authentication section proved a bit dificult as I was getting  `invalid apiKey signature combination` even with the provide recipe in https://docs.yellowcard.engineering/recipes/authentication-javascript-python.
 
 - Creating webhook was a bit stressful since I had to work with the POST,GET, DELETE endpoint during development to actually create them
 
-- Also understanding what yellow card was built around and how payment that were submitted were processed. 
-This was due to me having no initially knowledge of ramp payment.
+- Also understanding what yellow card was built around and how payment that were submitted were processed. This was due to me having no initially knowledge of ramp payment.
 
 - Got some errors when I provided custom payment reason during payment  submission.
 
