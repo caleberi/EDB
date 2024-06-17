@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	config, err := common.LoadConfiguration(common.ConfEnvSetting{YamlFilePath: []string{"./dev.yml"}})
+	config, err := common.LoadConfiguration(common.ConfEnvSetting{YamlFilePath: []string{"./dev.yml", "./dev.example.yml"}})
 	if err != nil {
 		log.Fatal(err)
 	}
