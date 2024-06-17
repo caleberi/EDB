@@ -26,16 +26,11 @@ func main() {
 		gin.ForceConsoleColor()
 	}
 
-	ctx, cancelFunc := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancelFunc()
 	clientOpts := options.Client().
 		ApplyURI(config.MongoDB.DBUri).
 		SetMaxPoolSize(20).
 		SetMinPoolSize(5)
-	client, err := mongo.Connect(ctx, clientOpts)
-	if err != nil {
-		log.Fatal(err)
-	}
+	client := setupDatabase(clientOpts)
 	app := &engine.Application{
 		DB:      client,
 		Config:  config,
@@ -50,4 +45,22 @@ func main() {
 	if err := app.ListenAndServe(); err != nil {
 		log.Panic(err)
 	}
+}
+
+func setupDatabase(clientOpts *options.ClientOptions) *mongo.Client {
+	ctx, cancelFunc := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancelFunc()
+
+	client, err := mongo.Connect(ctx, clientOpts)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx, cancelFunc = context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancelFunc()
+	err = client.Ping(ctx, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return client
 }
