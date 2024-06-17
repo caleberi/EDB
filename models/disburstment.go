@@ -43,10 +43,10 @@ type Payment struct {
 }
 
 type Disbursement struct {
-	ID           primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty" validate:"required"`
+	ID           primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty" validate:"required"`
 	ReceiverID   primitive.ObjectID `bson:"receiver_id,omitempty" json:"receiver_id,omitempty" validate:"required"`
-	CreatedAt    time.Time          `bson:"created_at,omitempty" json:"created_at,omitempty" validate:"required"`
-	UpdatedAt    time.Time          `bson:"updated_at,omitempty" json:"updated_at,omitempty" validate:"required"`
+	CreatedAt    *time.Time         `bson:"createdAt,omitempty" json:"-" validate:"required"`
+	UpdatedAt    *time.Time         `bson:"updatedAt,omitempty" json:"-" validate:"required"`
 	SalaryAmount float64            `bson:"salary_amount,omitempty" json:"salary_amount,omitempty" validate:"required"`
 	SenderID     primitive.ObjectID `bson:"sender_id,omitempty" json:"sender_id,omitempty" validate:"required"`
 	Status       string             `bson:"status,omitempty" json:"status,omitempty" validate:"required"`

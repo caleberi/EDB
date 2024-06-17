@@ -10,21 +10,21 @@ import (
 )
 
 var (
-	omitList = []string{
-		"password",
-		"createdAt",
-		"updatedAt",
+	userOmitList = []string{
+		"Password",
+		"CreatedAt",
+		"CpdatedAt",
 	}
 )
 
 type User struct {
-	ID                 primitive.ObjectID `validate:"mongodb" json:"_id,omitempty" bson:"_id,omitempty"`
+	ID                 primitive.ObjectID `validate:"mongodb" json:"id,omitempty" bson:"_id,omitempty"`
 	FirstName          string             `json:"firstName,omitempty" bson:"firstName,omitempty"`
 	LastName           string             `json:"lastName,omitempty" bson:"lastName,omitempty"`
 	Email              string             `validate:"required,email" json:"email,omitempty" bson:"email,omitempty"`
 	Password           string             `validate:"required" json:"password,omitempty" bson:"password,omitempty"`
-	CreatedAt          time.Time          `json:"createdAt,omitempty" bson:"createdAt,omitempty" validate:"required"`
-	UpdatedAt          time.Time          `json:"updatedAt,omitempty" bson:"updatedAt,omitempty" validate:"required"`
+	CreatedAt          *time.Time         `json:"-" bson:"createdAt,omitempty" validate:"required"`
+	UpdatedAt          *time.Time         `json:"-" bson:"updatedAt,omitempty" validate:"required"`
 	MiddleName         string             `json:"middleName,omitempty" bson:"middleName,omitempty"`
 	BVN                string             `json:"bvn,omitempty" bson:"bvn,omitempty"`
 	DOB                string             `json:"dob,omitempty" bson:"dob,omitempty"`
@@ -45,7 +45,7 @@ func (u *User) Omit() (User, error) {
 
 	for i := 0; i < userType.NumField(); i++ {
 		field := userType.Field(i)
-		if !lo.Contains(omitList, field.Name) {
+		if !lo.Contains(userOmitList, field.Name) {
 			value := reflect.ValueOf(*u).FieldByName(field.Name).Interface()
 			fieldValues[field.Name] = value
 		}
