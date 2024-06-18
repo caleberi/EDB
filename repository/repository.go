@@ -110,8 +110,9 @@ func (r *Repository[T]) FindMany(ctx context.Context, filter bson.D) ([]T, error
 func (r *Repository[T]) UpdateOneById(ctx context.Context, id primitive.ObjectID, document T) error {
 	filter := bson.D{{Key: "_id", Value: id}}
 	update := bson.D{{Key: "$set", Value: document}}
-	_, err := r.collection.UpdateOne(ctx, filter, update)
-	return err
+	opts := []*options.FindOneAndUpdateOptions{}
+	result := r.collection.FindOneAndUpdate(ctx, filter, update, opts...)
+	return result.Err()
 }
 
 // UpdateMany updates multiple documents based on the provided filter in the MongoDB collection.
