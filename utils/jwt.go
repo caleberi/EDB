@@ -17,7 +17,7 @@ func init() {
 type SigningPayload struct {
 	Payload                   any
 	Secret                    string
-	Alogrithm                 jose.SignatureAlgorithm
+	Algorithm                 jose.SignatureAlgorithm
 	Issuer, Subject, Audience string
 	Expiry                    time.Duration
 }
@@ -29,7 +29,7 @@ type VerificationPayload struct {
 }
 
 func Sign(payload SigningPayload) (string, error) {
-	signer, err := jose.NewSigner(jose.SigningKey{Algorithm: payload.Alogrithm, Key: []byte(payload.Secret)}, nil)
+	signer, err := jose.NewSigner(jose.SigningKey{Algorithm: payload.Algorithm, Key: []byte(payload.Secret)}, nil)
 	if err != nil {
 		logger.Errorf("Failed to create signer: %v\n", err)
 		return "", err

@@ -150,7 +150,7 @@ func LoginUser(c *gin.Context) {
 	}
 
 	token, err := utils.Sign(utils.SigningPayload{
-		Alogrithm: jose.HS256,
+		Algorithm: jose.HS256,
 		Payload:   user.ID,
 		Issuer:    cfg.JWTCredentials.AccessTokenClaim.Issuer,
 		Audience:  cfg.JWTCredentials.AccessTokenClaim.Audience,
