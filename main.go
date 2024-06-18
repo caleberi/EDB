@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	config, err := common.LoadConfiguration(common.ConfEnvSetting{YamlFilePath: []string{"./dev.yml", "./dev.example.yml"}})
+	config, err := common.LoadConfiguration(common.ConfEnvSetting{YamlFilePath: []string{"./dev.yml"}}) //"./dev.example.yml"
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -62,5 +62,6 @@ func setupDatabase(clientOpts *options.ClientOptions) *mongo.Client {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println(">>> Mongodb client connected")
 	return client
 }
