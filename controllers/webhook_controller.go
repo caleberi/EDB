@@ -49,7 +49,7 @@ func YellowCardWebHook(ctx *gin.Context) {
 		return
 	}
 
-	disbursement, err := repo.DisbursementRepository.FindOne(ctx, primitive.D{{Key: "payment.sequenceid", Value: hook.SequenceID}})
+	disbursement, err := repo.Disbursement.FindOne(ctx, primitive.D{{Key: "payment.sequenceid", Value: hook.SequenceID}})
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
 		return
@@ -60,7 +60,7 @@ func YellowCardWebHook(ctx *gin.Context) {
 		ProcessingEvent,
 		CompletedEvent,
 		FailedEvent:
-		err = repo.DisbursementRepository.UpdateOneById(ctx, disbursement.ID, models.Disbursement{Status: hook.Status})
+		err = repo.Disbursement.UpdateOneById(ctx, disbursement.ID, models.Disbursement{Status: hook.Status})
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
 			return

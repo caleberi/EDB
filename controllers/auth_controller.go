@@ -63,7 +63,7 @@ func RegisterUser(c *gin.Context) {
 	ctx, cancelFunc := context.WithTimeout(c, 5*time.Second)
 	defer cancelFunc()
 
-	if _, err := repo.UserRepository.FindOne(ctx, bson.D{{Key: "email", Value: createUserRequest.Email}}); !errors.Is(err, mongo.ErrNoDocuments) {
+	if _, err := repo.User.FindOne(ctx, bson.D{{Key: "email", Value: createUserRequest.Email}}); !errors.Is(err, mongo.ErrNoDocuments) {
 		logger.Infof("an error occurred : %v", err)
 		c.JSON(http.StatusInternalServerError, utils.ErrorResponse(errors.New("user with the provided email exist")))
 		return
@@ -97,7 +97,7 @@ func RegisterUser(c *gin.Context) {
 		Country:            createUserRequest.Country,
 	}
 
-	id, err := repo.UserRepository.Create(ctx, user)
+	id, err := repo.User.Create(ctx, user)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
@@ -135,7 +135,7 @@ func LoginUser(c *gin.Context) {
 	ctx, cancelFunc := context.WithTimeout(c, 5*time.Second)
 	defer cancelFunc()
 
-	user, err := repo.UserRepository.FindOne(ctx, primitive.D{{Key: "email", Value: loginRequest.Email}})
+	user, err := repo.User.FindOne(ctx, primitive.D{{Key: "email", Value: loginRequest.Email}})
 	if err != nil {
 		logger.Infof("error during login : %v", err)
 		c.JSON(http.StatusInternalServerError, utils.ErrorResponse(errors.New("user with this email does not exist")))

@@ -104,14 +104,14 @@ func AddEmployee(ctx *gin.Context) {
 	defer cancel()
 
 	logger.Infof("Checking if employee with email %s already exists", employeeRequest.Email)
-	_, err = repo.EmployeeRepository.FindOne(ctxWithTimeout, bson.D{{Key: "email", Value: employeeRequest.Email}})
+	_, err = repo.Employee.FindOne(ctxWithTimeout, bson.D{{Key: "email", Value: employeeRequest.Email}})
 	if !errors.Is(err, mongo.ErrNoDocuments) {
 		logger.Errorf("Employee with the provided email exists already: %v", err)
 		ctx.JSON(http.StatusNotFound, utils.ErrorResponse(errors.New("employee with the provided email exists already")))
 		return
 	}
 
-	id, err := repo.EmployeeRepository.Create(ctxWithTimeout, employee)
+	id, err := repo.Employee.Create(ctxWithTimeout, employee)
 	if err != nil {
 		logger.Errorf("Error occurred while creating employee: %v", err)
 		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
@@ -150,7 +150,7 @@ func DeleteEmployee(ctx *gin.Context) {
 	}
 
 	// Delete many is not proper here:, but it make ease witht the model definition
-	if err := repo.EmployeeRepository.DeleteMany(ctx, query); err != nil {
+	if err := repo.Employee.DeleteMany(ctx, query); err != nil {
 		ctx.JSON(http.StatusInternalServerError,
 			utils.ErrorResponse(fmt.Errorf("could not delete employee with id [%v]", employeeId.String())))
 		return
@@ -194,7 +194,7 @@ func UpdateEmployee(ctx *gin.Context) {
 		BVN:              employeeeRequest.Bvn,
 	}
 
-	if err := repo.EmployeeRepository.UpdateOneById(ctx, employeeId, employee); err != nil {
+	if err := repo.Employee.UpdateOneById(ctx, employeeId, employee); err != nil {
 		ctx.JSON(http.StatusInternalServerError,
 			utils.ErrorResponse(fmt.Errorf("could not update employee with id [%v]", employeeId.String())))
 		return

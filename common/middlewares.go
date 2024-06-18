@@ -113,7 +113,7 @@ func AuthorizeUser() gin.HandlerFunc {
 			return
 		}
 
-		user, err := repo.UserRepository.FindOne(ctx, primitive.D{{Key: "_id", Value: id}})
+		user, err := repo.User.FindOne(ctx, primitive.D{{Key: "_id", Value: id}})
 		if err != nil {
 			ctx.AbortWithError(http.StatusUnauthorized, errors.New("user with this email does not exist"))
 			return

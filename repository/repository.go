@@ -11,9 +11,9 @@ import (
 )
 
 type Repositories struct {
-	UserRepository         Repository[models.User]
-	EmployeeRepository     Repository[models.Employee]
-	DisbursementRepository Repository[models.Disbursement]
+	User         Repository[models.User]
+	Employee     Repository[models.Employee]
+	Disbursement Repository[models.Disbursement]
 }
 
 func InitRepositories(db *mongo.Database) *Repositories {
@@ -22,9 +22,9 @@ func InitRepositories(db *mongo.Database) *Repositories {
 	employeeRepo := NewRepository[models.Employee](db.Collection("employees"))
 	disbursementRepo := NewRepository[models.Disbursement](db.Collection("disbursement"))
 	return &Repositories{
-		UserRepository:         userRepo,
-		EmployeeRepository:     employeeRepo,
-		DisbursementRepository: disbursementRepo,
+		User:         userRepo,
+		Employee:     employeeRepo,
+		Disbursement: disbursementRepo,
 	}
 }
 

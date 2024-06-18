@@ -37,7 +37,7 @@ func MakeDisbursmentToEmployee(ctx *gin.Context) {
 
 	query := primitive.D{{Key: "_id", Value: employeeId}}
 
-	employee, err := repo.EmployeeRepository.FindOne(ctx, query)
+	employee, err := repo.Employee.FindOne(ctx, query)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
 		return
@@ -111,7 +111,7 @@ func MakeDisbursmentToEmployee(ctx *gin.Context) {
 		Payment:      payment,
 	}
 
-	_, err = repo.DisbursementRepository.Create(ctx, disbursment)
+	_, err = repo.Disbursement.Create(ctx, disbursment)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, utils.ErrorResponse(err))
 		return
