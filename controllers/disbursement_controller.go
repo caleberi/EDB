@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"strings"
 	"time"
 	"yc-backend/common"
 	"yc-backend/models"
@@ -58,7 +57,7 @@ func MakeDisbursmentToEmployee(ctx *gin.Context) {
 			"phone":              user.Phone,
 			"country":            user.Country,
 			"address":            user.Address,
-			"dob":                strings.ReplaceAll(user.DOB, "-", "/"),
+			"dob":                user.DOB,
 			"email":              user.Email,
 			"idNumber":           user.IdNumber,
 			"idType":             user.IdType,
