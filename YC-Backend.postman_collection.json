@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"Caleb Erioluwa\",\n    \"lastName\": \"Adewole\",\n    \"email\": \"caleberioluwa@gmail.com\",\n    \"password\":\"test1234\",\n    \"bvn\": \"23451678123\",\n    \"dob\": \"02/01/1997\",\n    \"idType\": \"passport\",\n    \"idNumber\": \"N5427812\",\n    \"additionalIDType\": \"license\",\n    \"address\": \"1234,abc str bronx\",\n    \"country\": \"Nigeria\",\n    \"phone\": \"+2348133345430\"\n}",
+							"raw": "{\n    \"firstName\": \"Caleb Erioluwa\",\n    \"lastName\": \"Adewole\",\n    \"email\": \"caleberioluwa@gmail.com\",\n    \"password\":\"test1234\",\n    \"bvn\": \"23451678123\",\n    \"dob\": \"1997-08-12\",\n    \"idType\": \"passport\",\n    \"idNumber\": \"N5427812\",\n    \"additionalIDType\": \"license\",\n    \"address\": \"1234,abc str bronx\",\n    \"country\": \"Nigeria\",\n    \"phone\": \"+2348133345430\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,7 +81,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIiLCJleHAiOjE3MTg0MDM4MTgsImlhdCI6MTcxODQwMzgxOCwiaXNzIjoieWMtYmFja2VyIiwicGF5bG9hZCI6IjY2Njk4ODg5Mzc2MjFiMjczMjQ2Y2M5YyIsInN1YiI6IkNhbGViIEVyaW9sdXdhOkFkZXdvbGUifQ.XLInAevNcCNKlcYdoJUxta2FRUhMTP-GhP9XnE61wDU",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIiLCJleHAiOjE3MTg2NzI4NTIsImlhdCI6MTcxODY3Mjg1MiwiaXNzIjoieWMtYmFja2VyIiwicGF5bG9hZCI6IjY2NzBkZGIyYzc3ODgzMTVjYzMyZTdkNCIsInN1YiI6IkNhbGViIEVyaW9sdXdhOkFkZXdvbGUifQ.01SW0j_AdaB-t5DR95op5KZ9yzhSM1tvxHlkUHVGbqc",
 									"type": "string"
 								}
 							]
@@ -90,7 +90,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"test121@gmail.com\",\n    \"firstName\": \"Taiwo\",\n    \"lastName\": \"Love\",\n    \"bvn\": \"23451678123\",\n    \"dob\": \"07-6-1988\",\n    \"idType\": \"passport\",\n    \"idNumber\": \"N5427812\",\n    \"salary\": 5400.2,\n    \"phone\": \"+23481457820\",\n    \"additionalIDType\": \"NIN\",\n    \"address\": \"1234,abc str londonx\"\n}",
+							"raw": "{\n    \"email\": \"john.doe@yellowcard.io\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"bvn\": \"23451678123\",\n    \"dob\": \"1997-06-12\",\n    \"idType\": \"passport\",\n    \"idNumber\": \"N5427812\",\n    \"salary\": 5400.2,\n    \"phone\": \"+2349092916898\",\n    \"additionalIDType\": \"license\",\n    \"address\": \"1234,abc str londonx\",\n    \"country\": \"Nigeria\",\n    \"account_name\": \"John Doe\",\n    \"account_type\": \"savings\",\n    \"bank_name\": \"GT Bank\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
